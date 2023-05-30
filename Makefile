@@ -54,8 +54,8 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt
-	sed -i '' -e '1s/^/syntax = "proto2"\;\npackage csgo\;\n/' protobufs/*.proto
-	sed -i '' -E 's/(optional|repeated) \.([A-Z])/\1 csgo.\2/' protobufs/*.proto
+	sed -i '' -e '1s/^/syntax = "proto2"\;\npackage custom_csgo\;\n/' protobufs/*.proto
+	sed -i '' -E 's/(optional|repeated) \.([A-Z])/\1 custom_csgo.\2/' protobufs/*.proto
 	sed -i '' -e 's/cc_generic_services/py_generic_services/' protobufs/*.proto
 
 pb_compile:
@@ -63,6 +63,7 @@ pb_compile:
 		protoc  --python_out ./custom_csgo/protobufs/ --pyi_out=./custom_csgo/protobufs/ --proto_path=./protobufs "$$filepath"; \
 	done;
 	sed -i '' -e '/^import sys/! s/^import /import custom_csgo.protobufs./' custom_csgo/protobufs/*_pb2.py
+	sed -i '' -e '/^import sys/! s/^import /import custom_csgo.protobufs./' custom_csgo/protobufs/*_pb2.pyi
 
 pb_clear:
 	rm -f ./protobufs/*.proto ./custom_csgo/protobufs/*_pb2.py
