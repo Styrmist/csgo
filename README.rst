@@ -12,6 +12,15 @@ for interacting with CSGO's Game Coordinator.
 | Contributions and suggestion are always welcome.
 
 
+How to create python proto file
+------------
+
+1. add link to proto file to proto_list.txt
+2. add proto module name tp gen_enum_from_protos.py (_proto_modules)
+3. run `make pb_update`
+4. optionally add proto files than are needed by your proto file to proto_list.txt
+
+
 Installation
 ------------
 

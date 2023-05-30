@@ -3,7 +3,7 @@
 import re
 from keyword import kwlist
 from google.protobuf.internal.enum_type_wrapper import EnumTypeWrapper
-from csgo import common_enums
+from custom_csgo import common_enums
 
 kwlist = set(kwlist + ['None'])
 
@@ -11,9 +11,10 @@ _proto_modules = ['gcsystemmsgs_pb2',
                   'gcsdk_gcmessages_pb2',
                   'cstrike15_gcmessages_pb2',
                   'econ_gcmessages_pb2',
+                  'netmessages_pb2',
                   ]
 
-_proto_module = __import__("csgo.protobufs", globals(), locals(), _proto_modules, 0)
+_proto_module = __import__("custom_csgo.protobufs", globals(), locals(), _proto_modules, 0)
 
 classes = {}
 

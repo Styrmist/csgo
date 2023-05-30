@@ -5,4 +5,7 @@ https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobu
 https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/engine_gcmessages.proto
 https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/cstrike15_gcmessages.proto
 https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/econ_gcmessages.proto
+https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/netmessages.proto
+https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/networkbasetypes.proto
+https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/master/Protobufs/network_connection.proto
 

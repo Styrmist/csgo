@@ -1,5 +1,40 @@
 from enum import IntEnum
 
+class Bidirectional_Messages(IntEnum):
+    bi_RebroadcastGameEvent = 16
+    bi_RebroadcastSource = 17
+    bi_GameEvent = 18
+
+class Bidirectional_Messages_LowFrequency(IntEnum):
+    bi_RelayInfo = 700
+    bi_RelayPacket = 701
+
+class CLC_Messages(IntEnum):
+    clc_ClientInfo = 20
+    clc_Move = 21
+    clc_VoiceData = 22
+    clc_BaselineAck = 23
+    clc_ListenEvents = 24
+    clc_RespondCvarValue = 25
+    clc_FileCRCCheck = 26
+    clc_LoadingProgress = 27
+    clc_SplitPlayerConnect = 28
+    clc_ClientMessage = 29
+    clc_SplitPlayerDisconnect = 30
+    clc_ServerStatus = 31
+    clc_ServerPing = 32
+    clc_RequestPause = 33
+    clc_CmdKeyValues = 34
+    clc_RconServerDetails = 35
+    clc_HltvReplay = 36
+
+class DIALOG_TYPE(IntEnum):
+    DIALOG_MSG = 0
+    DIALOG_MENU = 1
+    DIALOG_TEXT = 2
+    DIALOG_ENTRY = 3
+    DIALOG_ASKCONNECT = 4
+
 class EClientReportingVersion(IntEnum):
     OldVersion = 0
     BetaVersion = 1
@@ -126,6 +161,10 @@ class ECsgoGCMsg(IntEnum):
     EMsgGCCStrike15_v2_ClientRedeemMissionReward = 9209
     EMsgGCCStrike15_ClientDeepStats = 9210
     EMsgGCCStrike15_StartAgreementSessionInGame = 9211
+    EMsgGCCStrike15_v2_GC2ClientInitSystem = 9212
+    EMsgGCCStrike15_v2_GC2ClientInitSystem_Response = 9213
+    EMsgGCCStrike15_v2_PrivateQueues = 9214
+    EMsgGCCStrike15_v2_MatchListTournamentOperatorMgmt = 9215
 
 class ECsgoSteamUserStat(IntEnum):
     XpEarnedGames = 1
@@ -312,6 +351,7 @@ class EGCItemMsg(IntEnum):
     EMsgGCRequestPassportItemGrant = 2527
     EMsgGCClientVersionUpdated = 2528
     EMsgGCAdjustItemEquippedStateMulti = 2529
+    EMsgGCRecurringSubscriptionStatus = 2530
 
 class EGCMsgResponse(IntEnum):
     EGCMsgResponseOK = 0
@@ -416,6 +456,9 @@ class EGCSystemMsg(IntEnum):
     EGCMsgGetGamePersonalDataEntriesResponse = 527
     EGCMsgTerminateGamePersonalDataEntriesRequest = 528
     EGCMsgTerminateGamePersonalDataEntriesResponse = 529
+    EGCMsgRecurringSubscriptionStatusChange = 530
+    EGCMsgDirectServiceMethod = 531
+    EGCMsgDirectServiceMethodResponse = 532
 
 class EGCToGCMsg(IntEnum):
     EGCToGCMsgMasterAck = 150
@@ -427,6 +470,24 @@ class EGCToGCMsg(IntEnum):
     EMsgRequestSessionIPResponse = 156
     EGCToGCMsgMasterStartupComplete = 157
 
+EInitSystemResult = IntEnum('EInitSystemResult', {
+    'Invalid': 0,
+    'Success': 1,
+    'None': 2,
+    'NotFound': 3,
+    'Existing': 4,
+    'FailedOpen': 5,
+    'Mismatch': 6,
+    'FailedInit': 7,
+    'Max': 8,
+    })
+
+class EQueryCvarValueStatus(IntEnum):
+    eQueryCvarValueStatus_ValueIntact = 0
+    eQueryCvarValueStatus_CvarNotFound = 1
+    eQueryCvarValueStatus_NotACvar = 2
+    eQueryCvarValueStatus_CvarProtected = 3
+
 class ESOMsg(IntEnum):
     Create = 21
     Update = 22
@@ -436,6 +497,10 @@ class ESOMsg(IntEnum):
     UpdateMultiple = 26
     CacheSubscriptionCheck = 27
     CacheSubscriptionRefresh = 28
+
+class ESplitScreenMessageType(IntEnum):
+    MSG_SPLITSCREEN_ADDUSER = 0
+    MSG_SPLITSCREEN_REMOVEUSER = 1
 
 class EUnlockStyle(IntEnum):
     UnlockStyle_Succeeded = 0
@@ -457,7 +522,65 @@ class GCConnectionStatus(IntEnum):
     NO_SESSION_IN_LOGON_QUEUE = 3
     NO_STEAM = 4
 
+class PrefetchType(IntEnum):
+    PFT_SOUND = 0
+
+class ReplayEventType_t(IntEnum):
+    REPLAY_EVENT_CANCEL = 0
+    REPLAY_EVENT_DEATH = 1
+    REPLAY_EVENT_GENERIC = 2
+    REPLAY_EVENT_STUCK_NEED_FULL_UPDATE = 3
+    REPLAY_EVENT_VICTORY = 4
+
+class RequestPause_t(IntEnum):
+    RP_PAUSE = 0
+    RP_UNPAUSE = 1
+    RP_TOGGLEPAUSE = 2
+
+class SVC_Messages(IntEnum):
+    svc_ServerInfo = 40
+    svc_FlattenedSerializer = 41
+    svc_ClassInfo = 42
+    svc_SetPause = 43
+    svc_CreateStringTable = 44
+    svc_UpdateStringTable = 45
+    svc_VoiceInit = 46
+    svc_VoiceData = 47
+    svc_Print = 48
+    svc_Sounds = 49
+    svc_SetView = 50
+    svc_ClearAllStringTables = 51
+    svc_CmdKeyValues = 52
+    svc_BSPDecal = 53
+    svc_SplitScreen = 54
+    svc_PacketEntities = 55
+    svc_Prefetch = 56
+    svc_Menu = 57
+    svc_GetCvarValue = 58
+    svc_StopSound = 59
+    svc_PeerList = 60
+    svc_PacketReliable = 61
+    svc_HLTVStatus = 62
+    svc_ServerSteamID = 63
+    svc_FullFrameSplit = 70
+    svc_RconServerDetails = 71
+    svc_UserMessage = 72
+    svc_HltvReplay = 73
+    svc_Broadcast_Command = 74
+    svc_HltvFixupOperatorStatus = 75
+
+class SVC_Messages_LowFrequency(IntEnum):
+    svc_dummy = 600
+
+class VoiceDataFormat_t(IntEnum):
+    VOICEDATA_FORMAT_STEAM = 0
+    VOICEDATA_FORMAT_ENGINE = 1
+
 __all__ = [
+    'Bidirectional_Messages',
+    'Bidirectional_Messages_LowFrequency',
+    'CLC_Messages',
+    'DIALOG_TYPE',
     'EClientReportingVersion',
     'ECommunityItemAttribute',
     'ECommunityItemClass',
@@ -469,8 +592,17 @@ __all__ = [
     'EGCMsgResponse',
     'EGCSystemMsg',
     'EGCToGCMsg',
+    'EInitSystemResult',
+    'EQueryCvarValueStatus',
     'ESOMsg',
+    'ESplitScreenMessageType',
     'EUnlockStyle',
     'GCClientLauncherType',
     'GCConnectionStatus',
+    'PrefetchType',
+    'ReplayEventType_t',
+    'RequestPause_t',
+    'SVC_Messages',
+    'SVC_Messages_LowFrequency',
+    'VoiceDataFormat_t',
     ]

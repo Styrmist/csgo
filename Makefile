@@ -25,7 +25,7 @@ help:
 	@echo "$$HELPBODY"
 
 init:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 test:
 	coverage erase
@@ -54,20 +54,20 @@ upload: dist register
 
 pb_fetch:
 	wget -nv --show-progress -N -P ./protobufs/ -i protobuf_list.txt
-	sed -i '1s/^/syntax = "proto2"\;\npackage csgo\;\n/' protobufs/*.proto
-	sed -i 's/\(optional\|repeated\) \.\([A-Z]\)/\1 csgo.\2/' protobufs/*.proto
-	sed -i 's/cc_generic_services/py_generic_services/' protobufs/*.proto
+	sed -i '' -e '1s/^/syntax = "proto2"\;\npackage csgo\;\n/' protobufs/*.proto
+	sed -i '' -E 's/(optional|repeated) \.([A-Z])/\1 csgo.\2/' protobufs/*.proto
+	sed -i '' -e 's/cc_generic_services/py_generic_services/' protobufs/*.proto
 
 pb_compile:
 	for filepath in `ls ./protobufs/*.proto`; do \
-		protoc3 --python_out ./csgo/protobufs/ --proto_path=./protobufs "$$filepath"; \
+		protoc  --python_out ./custom_csgo/protobufs/ --pyi_out=./custom_csgo/protobufs/ --proto_path=./protobufs "$$filepath"; \
 	done;
-	sed -i '/^import sys/! s/^import /import csgo.protobufs./' csgo/protobufs/*_pb2.py
+	sed -i '' -e '/^import sys/! s/^import /import custom_csgo.protobufs./' custom_csgo/protobufs/*_pb2.py
 
 pb_clear:
-	rm -f ./protobufs/*.proto ./csgo/protobufs/*_pb2.py
+	rm -f ./protobufs/*.proto ./custom_csgo/protobufs/*_pb2.py
 
 gen_enums:
-	python gen_enum_from_protos.py > csgo/proto_enums.py
+	python3 gen_enum_from_protos.py > custom_csgo/proto_enums.py
 
 pb_update: pb_fetch pb_compile gen_enums
